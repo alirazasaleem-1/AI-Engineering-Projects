@@ -1,1 +1,9 @@
-[]
+[
+    {
+        "id": 1,
+        "type": "expense",
+        "amount": 500,
+        "category": "Food",
+        "description": "Lunch"
+    }
+]
