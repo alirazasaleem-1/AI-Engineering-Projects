@@ -6,6 +6,14 @@ def add_transaction(transactions):
     category = input("Enter Category: ")
     description = input("Enter Description: ")
 
+    transactions = {
+
+    "type"= transaction_type,
+    "amount" = amount,
+    "category" = category,
+    "description" = description
+    }
+
 
 
 transactions = []
