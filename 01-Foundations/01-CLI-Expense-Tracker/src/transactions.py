@@ -10,10 +10,10 @@ def add_transaction(transactions):
 
     transaction = {
 
-    "type"= transaction_type,
-    "amount" = amount,
-    "category" = category,
-    "description" = description
+    "type": transaction_type,
+    "amount":  amount,
+    "category": category,
+    "description":  description
     }
     
     transactions.append(transaction)

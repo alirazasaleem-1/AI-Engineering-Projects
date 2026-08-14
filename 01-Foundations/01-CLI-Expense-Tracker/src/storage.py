@@ -8,6 +8,6 @@ def load_transactions():
 
     return transactions
 
-def save_transcations(transcations):
+def save_transactions(transcations):
     with open(DATA_FILE, "w") as file:
         json.dump(transcations, file, indent=4)
