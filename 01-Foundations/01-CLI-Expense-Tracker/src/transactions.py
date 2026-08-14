@@ -1,3 +1,5 @@
+from storage import save_transactions
+
 def add_transaction(transactions):
     print("Add Transaction!")
 
@@ -15,6 +17,7 @@ def add_transaction(transactions):
     }
     
     transactions.append(transaction)
+    save_transactions(transactions)
 
 
 
