@@ -50,4 +50,16 @@ def add_transaction(transactions):
     
     transactions.append(transaction)
     save_transactions(transactions)
-    print(transactions)
+    print("Transaction Added Successfully ! ✅")
+
+
+def list_transactions(transactions):
+    print("\n==== Transactions ====")
+
+    for transaction in transactions:
+        print(f"ID: {transaction['id']}")
+        print(f"Type: {transaction['type'].title()}")
+        print(f"Amount: Rs. {transaction['amount']:.2f}")
+        print(f"Category: {transaction['category']}")
+        print(f"Description: {transaction['description']}")
+        print("------------------------")
