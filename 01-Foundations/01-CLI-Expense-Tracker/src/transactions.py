@@ -1,4 +1,4 @@
-from storage import save_transactions, load_transactions
+from storage import save_transactions
 
 def add_transaction(transactions):
     print("Add Transaction!")
@@ -51,8 +51,3 @@ def add_transaction(transactions):
     transactions.append(transaction)
     save_transactions(transactions)
     print(transactions)
-
-
-
-transactions = load_transactions()
-add_transaction(transactions)
