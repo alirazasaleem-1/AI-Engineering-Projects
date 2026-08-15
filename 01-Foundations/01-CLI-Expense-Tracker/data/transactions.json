@@ -1,9 +1,21 @@
 [
     {
-        "id": 1,
         "type": "expense",
-        "amount": 500,
-        "category": "Food",
-        "description": "Lunch"
+        "amount": 500.0,
+        "category": "Khana",
+        "description": "burger khaya"
+    },
+    {
+        "type": "expense",
+        "amount": 700.0,
+        "category": "Transport",
+        "description": "Job py jany ky liye"
+    },
+    {
+        "id": 3,
+        "type": "expense",
+        "amount": 300.0,
+        "category": "food",
+        "description": "small pizza"
     }
 ]
