@@ -56,6 +56,10 @@ def add_transaction(transactions):
 def list_transactions(transactions):
     print("\n==== Transactions ====")
 
+    if not transactions:
+        print("No Transactions Found.")
+        return 
+
     for transaction in transactions:
         print(f"ID: {transaction['id']}")
         print(f"Type: {transaction['type'].title()}")
@@ -63,3 +67,28 @@ def list_transactions(transactions):
         print(f"Category: {transaction['category']}")
         print(f"Description: {transaction['description']}")
         print("------------------------")
+
+def edit_transactions(transactions):
+    print("\n==== EDIT TRANSACTION ====")
+
+    while True:
+        try: 
+            transaction_id = int(input("Enter Transaction ID to edit: "))
+
+            if transaction_id > 0:
+                break 
+
+            print("ID must be greater than 0.")
+
+        except ValueError:
+            print("Invalid ID. Please enter a number. ")
+
+    found = False 
+    for transaction in transactions:
+        if transaction['id'] == transaction_id:
+            found = True 
+            print("Transaction Found ! ✅")
+            return 
+
+    if not found:
+        print("Transaction not Found. ❌")
