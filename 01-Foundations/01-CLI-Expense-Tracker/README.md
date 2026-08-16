@@ -139,7 +139,7 @@ This project was built to practice fundamental Python and Git skills, including:
 
 ## Author
 
-**Ali Raza**
+**Ali Raza Saleem**
 
 BS Computer Science Student
 
