@@ -103,6 +103,10 @@ def edit_transactions(transactions):
 
     choice = input("Enter your choice: ")
 
+    if choice not in ['1', '2', '3', '4', '5']:
+        print("Invalid Choice. ❌")
+        return 
+
     if choice == "1":
         while True:
             new_type = input("Enter new type: (income/expense): ").strip().lower()
@@ -185,6 +189,27 @@ def delete_transaction(transactions):
         print("Transaction not Found. ❌")
         return 
 
+def show_summary(transactions):
+    print("\n==== SUMMARY ====\n")
 
+    total_income = 0
+
+    for transaction in transactions:
+        if transaction['type'] == "income":
+            total_income += transaction['amount']
+
+    print(f"Total Income: Rs.{total_income}")
+
+    total_expenses = 0 
+
+    for transaction in transactions:
+        if transaction['type'] == "expense":
+            total_expenses += transaction['amount']
+
+    print(f"Total Expenses: Rs.{total_expenses}")
+
+    balance = total_income - total_expenses
+
+    print(f"Balance: Rs.{balance}")
 
 

@@ -1,4 +1,4 @@
-from transactions import add_transaction, list_transactions, edit_transactions, delete_transaction
+from transactions import add_transaction, list_transactions, edit_transactions, delete_transaction, show_summary
 from storage import load_transactions
 
 transactions = load_transactions()
@@ -28,6 +28,9 @@ while True:
 
     if choice == '4':
         delete_transaction(transactions)
+
+    if choice == '5':
+        show_summary(transactions)
 
     if choice == '6':
         print("Good bye ! 👋")
