@@ -70,11 +70,6 @@ def list_transactions(transactions):
 
 def edit_transactions(transactions):
     print("\n==== EDIT TRANSACTION ====\n")
-    print("1. Change Type ")
-    print("2. Change Amount")
-    print("3. Change Category")
-    print("4. Change Description")
-    print("5. Cancel")
 
     while True:
         try: 
@@ -93,9 +88,15 @@ def edit_transactions(transactions):
         if transaction['id'] == transaction_id:
             found = True 
             print("Transaction Found ! ✅")
-            return 
+            break  
 
     if not found:
         print("Transaction not Found. ❌")
 
+    print("\nWhat do you want to edit: ")
+    print("1. Change Type ")
+    print("2. Change Amount")
+    print("3. Change Category")
+    print("4. Change Description")
+    print("5. Cancel")
     
