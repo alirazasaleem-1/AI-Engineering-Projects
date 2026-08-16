@@ -192,6 +192,10 @@ def delete_transaction(transactions):
 def show_summary(transactions):
     print("\n==== SUMMARY ====\n")
 
+    if not transactions:
+        print("No Transactions Found. ")
+        return 
+
     total_income = 0
 
     for transaction in transactions:
