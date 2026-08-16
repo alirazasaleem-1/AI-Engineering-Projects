@@ -30,7 +30,7 @@ It allows users to record income and expenses, manage transactions, and view the
 
 ## Requirements
 
-- Python 3.x
+- Python 3.14
 - No external Python packages required
 
 ## How to Run
