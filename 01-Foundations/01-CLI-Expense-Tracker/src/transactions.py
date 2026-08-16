@@ -113,3 +113,46 @@ def edit_transactions(transactions):
                 break 
 
             print("Invalid type. Please enter income or expense.")
+
+    if choice == "2":
+        while True:
+            try: 
+                new_amount = int(input("Enter new amount: ").strip())
+
+                if new_amount > 0:
+                    transaction['amount'] = new_amount
+                    print("Amount updated Successfully ! ✅")
+                    break 
+
+                print("Amount must be greater than 0. ")
+            except ValueError:
+                print("Invalid amount. Please enter a number.")
+
+    if choice == "3":
+        while True:
+            new_category = input("Enter new category: ").strip()
+
+            if new_category:
+                transaction['category'] = new_category
+                print("Category updated Succesfully ! ✅")
+                break 
+
+            print("Category cannot be empty. ")
+
+    if choice == "4":
+        while True:
+            new_description = input("Enter new description: ").strip()
+
+            if new_description:
+                transaction['description'] = new_description
+                print("Description updated Successfully ! ✅")
+                break 
+
+            print("Category cannot be empty. ")
+
+    if choice == "5":
+        print("Added Cancelled. ")
+        return 
+
+    save_transactions(transactions)
+    print("Transaction updated successfully")
