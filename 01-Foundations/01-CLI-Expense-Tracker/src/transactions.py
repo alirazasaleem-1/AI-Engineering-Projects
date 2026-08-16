@@ -92,6 +92,7 @@ def edit_transactions(transactions):
 
     if not found:
         print("Transaction not Found. ❌")
+        return 
 
     print("\nWhat do you want to edit: ")
     print("1. Change Type ")
@@ -99,4 +100,16 @@ def edit_transactions(transactions):
     print("3. Change Category")
     print("4. Change Description")
     print("5. Cancel")
-    
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        while True:
+            new_type = input("Enter new type: (income/expense): ").strip().lower()
+
+            if new_type in ['income', 'expense']:
+                transaction['type'] = new_type
+                print("Type updated Successfully ! ✅")
+                break 
+
+            print("Invalid type. Please enter income or expense.")
