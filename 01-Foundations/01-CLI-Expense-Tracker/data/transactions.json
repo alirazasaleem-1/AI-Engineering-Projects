@@ -5,12 +5,5 @@
         "amount": 300.0,
         "category": "food",
         "description": "small pizza"
-    },
-    {
-        "id": 2,
-        "type": "expense",
-        "amount": 300.0,
-        "category": "food",
-        "description": "lunch"
     }
 ]

@@ -156,3 +156,35 @@ def edit_transactions(transactions):
 
     save_transactions(transactions)
     print("Transaction updated successfully")
+
+
+def delete_transaction(transactions):
+    print("\n==== DELETE TRANSACTION ====\n")
+
+    while True:
+        try: 
+            transaction_id = int(input("Enter Transaction ID to delete: ").strip())
+
+            if transaction_id > 0:
+                break 
+
+            print("ID must be greater than 0.")
+        except ValueError:
+            print("Invalid ID. Please enter a number. ")
+
+    found = False
+    for transaction in transactions:
+        if transaction['id'] == transaction_id:
+            found = True 
+            transactions.remove(transaction)
+            save_transactions(transactions)
+            print("Transaction deleted Successfully! ✅")
+            break 
+
+    if not found:
+        print("Transaction not Found. ❌")
+        return 
+
+
+
+
