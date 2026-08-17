@@ -12,3 +12,6 @@ for item in test_folder.iterdir():
         if item.suffix in ['.pdf', '.doc', '.docx']:
             print("It's a document.")
             category = "document"
+        if item.suffix in ['.mp4']:
+            print("It's a video.")
+            category = "video"
