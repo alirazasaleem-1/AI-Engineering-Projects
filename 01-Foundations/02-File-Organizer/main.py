@@ -9,9 +9,15 @@ for item in test_folder.iterdir():
         if item.suffix in ['.jpg', '.png']:
             print("It's an image")
             category = "image"
-        if item.suffix in ['.pdf', '.doc', '.docx']:
+            destination = test_folder / "Images"
+            destination.mkdir(exist_ok=True)
+        elif item.suffix in ['.pdf', '.doc', '.docx']:
             print("It's a document.")
             category = "document"
-        if item.suffix in ['.mp4']:
+            destination = test_folder / "Documents"
+            destination.mkdir(exist_ok=True)
+        elif item.suffix in ['.mp4']:
             print("It's a video.")
             category = "video"
+            destination = test_folder / "Videos"
+            destination.mkdir(exist_ok=True)
