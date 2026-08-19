@@ -18,11 +18,9 @@ for item in test_folder.iterdir():
             while destination_file.exists():
                 new_name = f"{item.stem}_{counter}{item.suffix}"
                 destination_file = destination / new_name
-                shutil.move(item, destination_file)
                 counter += 1
 
-            if not destination_file.exists():
-                shutil.move(item, destination)
+            shutil.move(item, destination)
 
         elif item.suffix in ['.pdf', '.doc', '.docx']:
             print("It's a document.")
@@ -37,8 +35,7 @@ for item in test_folder.iterdir():
                 destination_file = destination / new_name
                 counter += 1
 
-            if not destination_file.exists():
-                shutil.move(item, destination)
+            shutil.move(item, destination)
 
         elif item.suffix in ['.mp4']:
             print("It's a video.")
