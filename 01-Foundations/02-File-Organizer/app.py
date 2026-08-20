@@ -20,3 +20,15 @@ def get_category(file):
 def create_category_folder(category):
     destination = test_folder / category 
     destination.mkdir(exist_ok=True)
+
+def get_unique_destinatioin(destination_file):
+    counter = 1
+    original_stem = destination_file.stem 
+    while destination_file.exists():
+        new_name = f"{original_stem}_{counter}{destination_file.suffix}" 
+        destination_file = destination_file.parent / new_name
+        counter += 1 
+    return destination_file 
+
+destination_file = test_folder / "Images" / "dog.jpg"
+print(get_unique_destinatioin(destination_file))
