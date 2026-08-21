@@ -202,3 +202,115 @@ ERROR:root:FAILED TO MOVE: test3.jpg -> ...\Images\test3.jpg | Error: ...
 ```
 
 This provides a record of what happened during execution.
+
+## 🚨 Error Handling
+
+File movement is protected using `try/except`.
+
+If a file cannot be moved:
+
+1. The error is caught.
+2. The error is written to the log.
+3. The program continues processing other files.
+
+Example:
+
+```python
+try:
+    shutil.move(item, unique_destination)
+    logging.info(f"FILE MOVED: {item.name} -> {unique_destination}")
+except Exception as e:
+    logging.error(f"FAILED TO MOVE: {item.name} -> {unique_destination} | Error: {e}")
+```
+
+## 🧪 Testing
+
+The organizer was tested using test files with different extensions and scenarios.
+
+Testing included:
+
+* Image files
+* Document files
+* Video files
+* Music files
+* Unknown file types
+* Duplicate filenames
+* Dry-run mode
+* Successful file movement
+* Failed file movement
+* Error logging
+* Test files in a safe testing environment
+
+## ⚠️ Safety Precautions
+
+Before using the organizer on real data:
+
+1. Test on a temporary/test folder first.
+2. Use dry-run mode to preview changes.
+3. Do not initially test on important personal files.
+4. Keep a backup of important data.
+5. The program moves files; it does not delete them.
+6. Duplicate filenames are renamed instead of overwritten.
+7. Check `organizer.log` if something goes wrong.
+8. Verify the destination folders after organization.
+
+## 📁 Project Structure
+
+```text
+02-File-Organizer/
+├── app.py
+├── README.md
+├── organizer.log
+├── Images/
+├── Documents/
+├── Videos/
+├── Music/
+└── Others/
+```
+
+## 🚀 Future Improvements
+
+Possible future upgrades:
+
+* Command-line arguments
+* Proper `--dry-run` CLI option
+* Configurable categories using JSON/YAML
+* Scheduled execution
+* Undo/rollback functionality
+* Better logging configuration
+* GUI interface
+* Streamlit interface
+* Cloud storage integration
+
+These features are not part of the current version.
+
+## 💼 What This Project Demonstrates
+
+This project demonstrates practical experience with:
+
+* Python automation
+* Filesystem manipulation
+* Safe file operations
+* Error handling
+* Logging
+* Defensive programming
+* Basic software design
+
+## 📌 Project Status
+
+**Project 2 — File Organizer Automation**
+
+| Feature            | Status |
+| ------------------ | ------ |
+| Scan directory     | ✅      |
+| Classify files     | ✅      |
+| Create folders     | ✅      |
+| Safe file movement | ✅      |
+| Duplicate handling | ✅      |
+| Dry-run mode       | ✅      |
+| Logging            | ✅      |
+| Error handling     | ✅      |
+| Testing            | ✅      |
+| Documentation      | ✅      |
+
+**Project Complete 🎉**
