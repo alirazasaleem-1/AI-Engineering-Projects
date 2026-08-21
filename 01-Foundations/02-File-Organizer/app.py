@@ -2,14 +2,21 @@ from pathlib import Path
 import shutil 
 import logging 
 
+test_folder = Path(r"D:\PythonProjects\AI-Engineering-Projects\01-Foundations\02-File-Organizer")
+log_file = test_folder / "organizer.log"
+logging.basicConfig(
+    filename = log_file,
+    level = logging.INFO
+)
+
+logging.info("Program Started")
+
 categories = {
     "Images": ['.png', '.jpg','.jpeg', '.svg'],
     "Documents": ['.doc', '.docx', '.pdf', '.txt'],
     "Videos": ['.mp4', '.mkv', '.avi'],
     "Music": ['.mp3', '.wav', '.flac']
 }
-
-test_folder = Path(r"D:\PythonProjects\AI-Engineering-Projects\01-Foundations\02-File-Organizer")
 
 def get_category(file):
     for category, extensions in categories.items():
@@ -34,8 +41,8 @@ def get_unique_destination(destination_file):
 def organize_folder(test_folder, dry_run = False):
     for item in test_folder.iterdir():
         if item.is_file():
-            
-            if item.name == "app.py":
+
+            if item.name == "app.py" or item.name == "organizer.log":
                 continue 
 
             category = get_category(item)
@@ -45,7 +52,11 @@ def organize_folder(test_folder, dry_run = False):
             if dry_run:
                 print(f"DRY RUN: {item.name} -> {unique_destination}")
             else: 
-                shutil.move(item, unique_destination)
+                try:
+                    shutil.move(item, unique_destination)
+                    logging.info(f"FILE MOVED: {item.name} -> {unique_destination}")
+                except Exception as e:
+                    logging.error(f"FAILED TO MOVE: {item.name} -> {unique_destination} | Error: {e}")
 
     if dry_run:
         print("Dry run completed. No files were moved.")

@@ -1,0 +1,5 @@
+INFO:root:Program Started
+INFO:root:Program Started
+INFO:root:FILE MOVED: test2.jpg -> D:\PythonProjects\AI-Engineering-Projects\01-Foundations\02-File-Organizer\Images\test2.jpg
+INFO:root:Program Started
+ERROR:root:FAILED TO MOVE: test3.jpg -> D:\PythonProjects\AI-Engineering-Projects\01-Foundations\02-File-Organizer\Images\test3.jpg | Error: [WinError 3] The system cannot find the path specified
