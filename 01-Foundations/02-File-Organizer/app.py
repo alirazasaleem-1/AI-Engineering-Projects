@@ -41,4 +41,4 @@ def organize_folder(test_folder):
             shutil.move(item, unique_destination)
 
 organize_folder(test_folder)
-print("Folder is organizedn now.")
+print("Folder is organized now.")
