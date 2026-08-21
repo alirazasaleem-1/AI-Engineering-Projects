@@ -17,8 +17,8 @@ def get_category(file):
             return category 
     return "Others"
 
-def create_category_folder(category):
-    destination = test_folder / category 
+def create_category_folder(folder, category):
+    destination = folder / category 
     destination.mkdir(exist_ok=True)
     return destination 
 
@@ -35,7 +35,7 @@ def organize_folder(test_folder):
     for item in test_folder.iterdir():
         if item.is_file():
             category = get_category(item)
-            destination = create_category_folder(category)
+            destination = create_category_folder(test_folder, category)
             destination_file = destination / item.name 
             unique_destination = get_unique_destination(destination_file)
             shutil.move(item, unique_destination)
