@@ -42,9 +42,5 @@ def organize_folder(test_folder, dry_run = False):
             else: 
                 shutil.move(item, unique_destination)
 
-    if dry_run:
-        print("Dry run completed. No files were moved.")
-    else:
-        print("Folder organized successfully.")
-
 organize_folder(test_folder)
+print("Folder is organized now.")
