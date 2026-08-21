@@ -1,5 +1,6 @@
 from pathlib import Path
 import shutil 
+import logging 
 
 categories = {
     "Images": ['.png', '.jpg','.jpeg', '.svg'],
@@ -33,6 +34,10 @@ def get_unique_destination(destination_file):
 def organize_folder(test_folder, dry_run = False):
     for item in test_folder.iterdir():
         if item.is_file():
+            
+            if item.name == "app.py":
+                continue 
+
             category = get_category(item)
             destination = create_category_folder(test_folder, category)
             destination_file = destination / item.name 
