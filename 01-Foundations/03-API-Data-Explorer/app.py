@@ -10,6 +10,10 @@ def get_pokemon_info(name):
     if response.status_code == 200:
         pokemon_data = response.json()
         return pokemon_data
+
+    elif response.status_code == 404:
+        print(f"Pokemon not Found. Error: {response.status_code}")
+
     else:
         print(f"Failed to retrieve data {response.status_code}")
 
