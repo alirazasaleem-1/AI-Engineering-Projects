@@ -9,7 +9,13 @@ def get_pokemon_info(name):
 
     if response.status_code == 200:
         pokemon_data = response.json()
-        return pokemon_data
+
+        required_fields = ['name', 'id', 'height', 'weight']
+
+        if all(field in pokemon_data for field in required_fields):
+            return pokemon_data
+        else:
+            print("Invalid API response")
 
     elif response.status_code == 404:
         print(f"Pokemon not Found. Error: {response.status_code}")
