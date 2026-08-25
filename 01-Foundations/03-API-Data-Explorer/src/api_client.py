@@ -1,4 +1,5 @@
 import requests 
+from .models import Pokemon
 
 base_url = "https://pokeapi.co/api/v2"
 
@@ -13,7 +14,12 @@ def get_pokemon_info(name):
         required_fields = ['name', 'id', 'height', 'weight']
 
         if all(field in pokemon_data for field in required_fields):
-            return pokemon_data
+            return Pokemon(
+                name=pokemon_data['name'],
+                id= pokemon_data['id'],
+                height= pokemon_data['height'],
+                weight= pokemon_data['weight']
+            )
         else:
             print("Invalid API response")
 
