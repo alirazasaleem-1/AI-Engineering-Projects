@@ -1,5 +1,6 @@
 import requests 
 from .models import Pokemon
+import time 
 
 base_url = "https://pokeapi.co/api/v2"
 
@@ -11,8 +12,10 @@ def get_pokemon_info(name):
             response = requests.get(url, timeout=10)
         except requests.exceptions.Timeout:
             print(f"Attempt: {attempt + 1}: Request Timed out.")
+            time.sleep(2)
         except requests.exceptions.RequestException:
             print(f"Attempt: {attempt + 1}: Network Error.")
+            time.sleep(2)
     else:
         print("Failed after 3 attempts. ")
         return None 
