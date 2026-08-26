@@ -6,7 +6,12 @@ base_url = "https://pokeapi.co/api/v2"
 def get_pokemon_info(name):
     url = f"{base_url}/pokemon/{name}"
 
-    response = requests.get(url, timeout=10)
+    try:
+        response = requests.get(url, timeout=10)
+    except requests.exceptions.Timeout:
+        print("Request Timed out. Please try again.")
+    except requests.exceptions.RequestException:
+        print("Netword Error. Please check your internet connection.")
 
     if response.status_code == 200:
         pokemon_data = response.json()
