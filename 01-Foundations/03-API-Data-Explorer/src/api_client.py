@@ -37,9 +37,15 @@ def get_pokemon_info(name):
 
     elif response.status_code == 404:
         print(f"Pokemon not Found. Error: {response.status_code}")
+        return None 
+
+    elif response.status_code == 429:
+        print("Rate limit reached. Please try again later.")
+        return None 
 
     elif response.status_code >= 500:
         print(f"PokeAPI server error. Try again later. Error: {response.status_code}")
+        return None 
 
     else:
         print(f"Failed to retrieve data {response.status_code}")
