@@ -6,12 +6,16 @@ base_url = "https://pokeapi.co/api/v2"
 def get_pokemon_info(name):
     url = f"{base_url}/pokemon/{name}"
 
-    try:
-        response = requests.get(url, timeout=10)
-    except requests.exceptions.Timeout:
-        print("Request Timed out. Please try again.")
-    except requests.exceptions.RequestException:
-        print("Netword Error. Please check your internet connection.")
+    for attempt in range(3):
+        try:
+            response = requests.get(url, timeout=10)
+        except requests.exceptions.Timeout:
+            print(f"Attempt: {attempt + 1}: Request Timed out.")
+        except requests.exceptions.RequestException:
+            print(f"Attempt: {attempt + 1}: Network Error.")
+    else:
+        print("Failed after 3 attempts. ")
+        return None 
 
     if response.status_code == 200:
         pokemon_data = response.json()
