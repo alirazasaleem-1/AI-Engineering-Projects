@@ -10,15 +10,12 @@ def get_pokemon_info(name):
     for attempt in range(3):
         try:
             response = requests.get(url, timeout=10)
-        except requests.exceptions.Timeout:
-            print(f"Attempt: {attempt + 1}: Request Timed out.")
+        except requests.exceptions.Timeout as e:
+            print(f"Attempt: {attempt + 1}: {e}.")
             time.sleep(2)
-        except requests.exceptions.RequestException:
-            print(f"Attempt: {attempt + 1}: Network Error.")
+        except requests.exceptions.RequestException as e:
+            print(f"Attempt: {attempt + 1}: {e}.")
             time.sleep(2)
-    else:
-        print("Failed after 3 attempts. ")
-        return None 
 
     if response.status_code == 200:
         pokemon_data = response.json()
