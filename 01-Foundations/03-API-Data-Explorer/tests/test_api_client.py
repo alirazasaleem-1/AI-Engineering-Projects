@@ -12,3 +12,18 @@ def test_invalid_pokemon():
 
     assert pokemon is None
 
+from src.models import Pokemon
+
+
+def test_pokemon_model():
+    pokemon = Pokemon(
+        name="pikachu",
+        id=25,
+        height=4,
+        weight=60
+    )
+
+    assert pokemon.name == "pikachu"
+    assert pokemon.id == 25
+    assert pokemon.height == 4
+    assert pokemon.weight == 60
