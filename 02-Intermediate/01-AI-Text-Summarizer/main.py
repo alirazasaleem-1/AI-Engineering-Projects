@@ -17,7 +17,7 @@ def summarize(text):
     try:
         response = client.models.generate_content(
             model="gemini-3.6-flash",
-            contents=f"Summarize this text and provide summarized, brief, consize simple text without stars etc in response. Just simple summarized text.\n\n{text}"
+            contents=f"Summarize this text and provide summarized, brief, concise simple text without stars etc in response. Just simple summarized text.\n\n{text}"
         )
 
         return response.text 
