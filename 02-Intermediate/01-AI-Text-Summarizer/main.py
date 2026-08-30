@@ -14,16 +14,24 @@ client = genai.Client(api_key=api_key)
 
 # Summarize Function using our client
 def summarize(text):
-    response = client.models.generate_content(
-        model="gemini-3.6-flash",
-        contents=f"Summarize this text and provide summarized, brief, consize simple text without stars etc in response. Just simple summarized text.\n\n{text}"
-    )
+    try:
+        response = client.models.generate_content(
+            model="gemini-3.6-flash",
+            contents=f"Summarize this text and provide summarized, brief, consize simple text without stars etc in response. Just simple summarized text.\n\n{text}"
+        )
 
-    return response.text 
+        return response.text 
+
+    except Exception as e:
+        print(f"API ERROR: {e}")
+        return None 
 
 # Input and Output
 print("==== ALI'S AI TEXT SUMMARIZER ====")
 text = input("Enter Text to Summarize: \n")
-summary = summarize(text)
+if not text:
+    print("Text can't be leaved empty.")
+if text:
+    summary = summarize(text)
 print("==== SUMMARY ====")
 print(summary)
