@@ -32,16 +32,40 @@ def summarize(text, style):
     except Exception as e:
         print(f"API ERROR: {e}")
         return None 
+    
+# File Read Function
+
+def read_file(file_path):
+    if file_path.exists():
+        print("File exists.")
+        with open(file_path, "r") as f:
+            text = f.read() 
+            return text 
+    else:
+        print("File doesn't exist.")
+        return None 
 
 # Input and Output
 def main():
     print("==== ALI'S AI TEXT SUMMARIZER ====")
 
-    text = input("Enter text to summarize: \n")
+    print("Type 1 for Text Input")
+    print("Type 2 for File Input")
+    choice = int(input("Enter your choice: ").strip())
 
-    if not text:
-            print("Text can't be leaved empty. ")
-            return  
+    if choice == 1:
+        text = input("Enter text to summarize: \n")
+        
+        if not text:
+                print("Text can't be leaved empty. ")
+                return  
+
+    elif choice == 2:
+        file_path = Path(input("Ente the file Path: ").strip())
+        text = read_file(file_path)
+
+        if text is None:
+            return
 
     styles = ["short", "detailed", "bulletpoint"]
     style = input("Choose a summary style (short/detailed/bulletpoint): ")
