@@ -5,7 +5,6 @@ import os
 from dotenv import load_dotenv
 from google import genai
 from pathlib import Path 
-import sys
 
 # Get the API to create gemini client
 env_path = Path(__file__).parent / ".env"
@@ -28,12 +27,16 @@ def summarize(text):
         return None 
 
 # Input and Output
-print("==== ALI'S AI TEXT SUMMARIZER ====")
-text = input("Enter Text to Summarize: \n")
-if not text:
-    print("Text can't be leaved empty.")
-    sys.exit()
-if text:
+def main():
+    print("==== ALI'S AI TEXT SUMMARIZER ====")
+
+    text = input("Enter text to summarize: \n")
+    if not text:
+        print("Text can't be leaved empty. ")
+        return  
     summary = summarize(text)
-print("==== SUMMARY ====")
-print(summary)
+    print("\n==== SUMMARY ====")
+    print(summary)
+
+if __name__ == "__main__":
+    main()
