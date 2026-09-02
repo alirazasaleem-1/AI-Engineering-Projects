@@ -52,7 +52,7 @@ def log_metadata(input_type, style, text, success):
     metadata = {
         "input_type": input_type,
         "summary_style": style, 
-        "text": text, 
+        "text_length": len(text), 
         "success": success
     }
 
