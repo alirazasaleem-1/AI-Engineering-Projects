@@ -2,9 +2,11 @@
 
 # Imports 
 import os 
+import json 
 from dotenv import load_dotenv
 from google import genai
 from pathlib import Path 
+from datetime import datetime 
 
 # Get the API to create gemini client
 env_path = Path(__file__).parent / ".env"
@@ -45,6 +47,29 @@ def read_file(file_path):
         print("File doesn't exist.")
         return None 
 
+# Log useful metadat Function
+def log_metadata(input_type, style, text, success):
+    metadata = {
+        "input_type": input_type,
+        "summary_style": style, 
+        "text": text, 
+        "success": success
+    }
+
+    log_file = Path("metadata.json")
+
+    if log_file.exists():
+        with open (log_file, "r") as f:
+            logs = json.load(f)
+    else:
+        logs = []
+
+    logs.append(metadata)
+
+    with open (log_file, "w") as f:
+        json.dump(logs, f, indent=4)
+        
+
 # Input and Output
 def main():
     print("==== ALI'S AI TEXT SUMMARIZER ====")
@@ -60,12 +85,16 @@ def main():
                 print("Text can't be leaved empty. ")
                 return  
 
+        input_type == "text"
+
     elif choice == 2:
         file_path = Path(input("Ente the file Path: ").strip())
         text = read_file(file_path)
 
         if text is None:
             return
+
+        input_type = "file"
 
     styles = ["short", "detailed", "bulletpoint"]
     style = input("Choose a summary style (short/detailed/bulletpoint): ")
@@ -75,8 +104,14 @@ def main():
         return 
     
     summary = summarize(text, style)
+    if summary is None:
+        log_metadata(input_type, style, text, False)
+        return 
+    
     print("\n==== SUMMARY ====")
     print(summary)
+
+    log_metadata(input_type, style, text, True)
 
 if __name__ == "__main__":
     main()
