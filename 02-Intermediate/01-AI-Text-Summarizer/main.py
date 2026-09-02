@@ -85,7 +85,7 @@ def main():
                 print("Text can't be leaved empty. ")
                 return  
 
-        input_type == "text"
+        input_type = "text"
 
     elif choice == 2:
         file_path = Path(input("Ente the file Path: ").strip())
