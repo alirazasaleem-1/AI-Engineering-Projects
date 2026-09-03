@@ -56,7 +56,7 @@ def log_metadata(input_type, style, text, success):
         "success": success
     }
 
-    metadata["time_stampt"] = datetime.now().isoformat()
+    metadata["time_stamp"] = datetime.now().isoformat()
 
     log_file = Path("metadata.json")
 
