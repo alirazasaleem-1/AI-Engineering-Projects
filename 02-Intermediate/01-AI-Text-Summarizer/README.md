@@ -196,4 +196,4 @@ This project is part of my journey toward becoming an AI Engineer and building p
 
 **Completed ✅**
 
-The project demonstrates the fundamentals of building an LLM-powered Python application that accepts text or file input, generates controlled summaries using Gemini, handles common errors, protects API credentials, and records useful non-sensitive metadata..
+The project demonstrates the fundamentals of building an LLM-powered Python application that accepts text or file input, generates controlled summaries using Gemini, handles common errors, protects API credentials, and records useful non-sensitive metadata... 
