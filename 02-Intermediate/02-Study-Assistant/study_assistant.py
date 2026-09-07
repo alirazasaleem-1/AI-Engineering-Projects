@@ -47,3 +47,12 @@ if st.button("Submit Question"):
             "answer": "Pending response..."
         })
     st.success(f"✅ {question}")
+
+# Displaying Questions
+if st.session_state.history:
+    for i, item in enumerate(st.session_state.history):
+        st.write(f"**Q{i+1}:** {item['question']}")
+        st.write(f"**A:** {item['answer']}")
+        st.divider()
+else:
+    st.info("💡 No questions asked yet. Ask your first question! ")
