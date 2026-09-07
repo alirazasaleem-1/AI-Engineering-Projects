@@ -4,6 +4,10 @@ import streamlit as st
 st.set_page_config(page_icon="🏫", page_title="AI Study Assistant", layout="wide")
 st.title("📚 AI Study Assistant")
 
+# Session State 
+if "notes" not in st.session_state:
+    st.session_state.notes = ""
+
 # Side Bar 
 with st.sidebar:
     st.header("📖 Instructions")
