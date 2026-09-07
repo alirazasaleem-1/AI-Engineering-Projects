@@ -46,7 +46,9 @@ if st.button("Submit Question"):
             "question": question,
             "answer": "Pending response..."
         })
-    st.success(f"✅ {question}")
+        st.success(f"✅ {question}")
+    else:
+        st.warning("⚠ Please enter a question.")
 
 # Displaying Questions
 if st.session_state.history:
