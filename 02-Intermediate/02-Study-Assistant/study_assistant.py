@@ -23,6 +23,11 @@ input_method = st.radio("Choose input method: ", ["Upload File", "Type Notes"])
 
 if input_method == "Upload File":
     uploaded_file = st.file_uploader("Upload (.txt)")
+
+    if uploaded_file:
+        content = uploaded_file.read().decode("utf-8")
+        st.session_state.notes = content 
+        st.success("✅ Notes Loaded.")
 else:
     notes_text = st.text_area("Paste notes: ")
 
