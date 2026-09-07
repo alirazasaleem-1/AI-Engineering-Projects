@@ -7,6 +7,8 @@ st.title("📚 AI Study Assistant")
 # Session State 
 if "notes" not in st.session_state:
     st.session_state.notes = ""
+if "history" not in st.session_state:
+    st.session_state.history = []
 
 # Side Bar 
 with st.sidebar:
@@ -31,7 +33,17 @@ if input_method == "Upload File":
 else:
     notes_text = st.text_area("Paste notes: ")
 
+    if notes_text:
+        st.session_state.notes = notes_text
+        st.success("✅ Notes Saved.")
+
 # Question input 
 question = st.text_input("Your question: ")
 if st.button("Submit Question"):
+
+    if question:
+        st.session_state.history.append({
+            "question": question,
+            "answer": "Pending response..."
+        })
     st.success(f"✅ {question}")
