@@ -58,8 +58,10 @@ else:
 # Question input 
 question = st.text_input("Your question: ")
 if st.button("Submit Question"):
+    if not st.session_state.notes:
+        st.error("⚠ Please upload or paste notes first!")
 
-    if question:
+    elif question:
         prompt = f"Based on these notes: {st.session_state.notes}, answer this question: {question}. Keep it short and clear."
 
         response = model.generate_content(prompt)
