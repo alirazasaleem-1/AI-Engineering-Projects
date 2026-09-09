@@ -10,7 +10,12 @@ load_dotenv(env_path)
 
 api_key = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=api_key)
-model = genai.GenerativeModel("gemini-3.6-flash")
+system_instruction = """You are a friendly AI study assistant.
+Your job is to help students understand concepts from their notes.
+Only answer questions related to the provided notes.
+Keep answers short, clear, and simple.
+If the question is off-topic, politely say you can't help with that."""
+model = genai.GenerativeModel("gemini-3.6-flash", system_instruction=system_instruction)
 
 
 # App Setup
@@ -55,9 +60,14 @@ question = st.text_input("Your question: ")
 if st.button("Submit Question"):
 
     if question:
+        prompt = f"Based on these notes: {st.session_state.notes}, answer this question: {question}. Keep it short and clear."
+
+        response = model.generate_content(prompt)
+        answer = response.text 
+
         st.session_state.history.append({
             "question": question,
-            "answer": "Pending response..."
+            "answer": answer
         })
         st.success(f"✅ {question}")
     else:
