@@ -1,4 +1,17 @@
 import streamlit as st
+import  google.generativeai as  genai 
+from dotenv import load_dotenv
+from pathlib import Path 
+import os 
+
+# Loading env
+env_path = Path(__name__).parent / ".env"
+load_dotenv(env_path)
+
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+model = genai.GenerativeModel("gemini-3.6-flash")
+
 
 # App Setup
 st.set_page_config(page_icon="🏫", page_title="AI Study Assistant", layout="wide")
