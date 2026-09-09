@@ -5,7 +5,7 @@ from pathlib import Path
 import os 
 
 # Loading env
-env_path = Path(__name__).parent / ".env"
+env_path = Path(__file__).parent / ".env"
 load_dotenv(env_path)
 
 api_key = os.getenv("GEMINI_API_KEY")
