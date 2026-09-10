@@ -62,16 +62,19 @@ if st.button("Submit Question"):
         st.error("⚠ Please upload or paste notes first!")
 
     elif question:
-        prompt = f"Based on these notes: {st.session_state.notes}, answer this question: {question}. Keep it short and clear."
+        try:
+            prompt = f"Based on these notes: {st.session_state.notes}, answer this question: {question}. Keep it short and clear."
 
-        response = model.generate_content(prompt)
-        answer = response.text 
+            response = model.generate_content(prompt)
+            answer = response.text 
 
-        st.session_state.history.append({
-            "question": question,
-            "answer": answer
-        })
-        st.success(f"✅ {question}")
+            st.session_state.history.append({
+                "question": question,
+                "answer": answer
+            })
+            st.success(f"✅ {question}")
+        except Exception as e:
+            st.error(f"Error {e}: Could not get answer. Try Again. ")
     else:
         st.warning("⚠ Please enter a question.")
 
