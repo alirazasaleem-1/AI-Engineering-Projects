@@ -1,49 +1,402 @@
-# AI Study Assistant - Project 5
+# 📚 AI Study Assistant
 
-## Overview
-AI Study Assistant is a production-ready Streamlit application that leverages Google's Gemini AI to provide intelligent, context-aware answers to student questions based on uploaded or pasted study notes. Built with a focus on security, error handling, and user experience, this application demonstrates real-world AI integration patterns and best practices in web application development.
+An AI-powered study assistant that helps students understand their own study notes through natural-language questions. The application uses Google's Gemini API to generate concise, context-aware answers while maintaining conversation history within the active session.
 
-## Features
-The application provides multiple input methods for study materials, allowing users to either upload text files or paste content directly into the interface. Once notes are loaded into the application's persistent session state, users can ask unlimited questions and receive AI-generated answers specifically grounded in their study materials. The system maintains a complete conversation history throughout the session, displaying all previous questions and answers in chronological order. Built-in guardrails ensure the AI assistant remains focused on study-related topics and politely declines to answer off-topic questions. The application includes comprehensive error handling for edge cases such as missing notes, empty questions, and API timeouts, providing users with clear, actionable feedback. All sensitive data including API keys is securely managed through environment variables and never exposed in the codebase. The user interface features a clean, intuitive design with a sidebar containing usage instructions, making the application accessible to users of all technical levels.
+Built as **Project 5** in my AI Engineering project-based curriculum, this project focuses on integrating a generative AI API into a user-facing application while applying practical software engineering fundamentals such as state management, input validation, error handling, environment-based configuration, and prompt guardrails.
 
-## Technology Stack
-The project is built with Streamlit as the core web framework, providing rapid UI development without HTML/CSS/JavaScript. Google's Generative AI API (Gemini 3.6 Flash) powers the intelligent response generation with context-aware processing. Python's dotenv library manages secure environment variable loading, and the application is version controlled using Git.
+---
 
-## Project Structure
-The application is organized as a single-file Streamlit application containing all necessary imports, environment configuration, session state management, UI components, and API integration logic. The codebase follows clean code principles with clear sections for setup, configuration, UI elements, and business logic. All sensitive credentials are stored in a .env file that is excluded from version control through .gitignore.
+## 🚀 Features
 
-## Installation and Setup
-To run this project locally, first clone the repository and navigate to the project directory. Install the required dependencies using pip install streamlit google-generativeai python-dotenv. Create a .env file in the project root directory and add your Gemini API key as GEMINI_API_KEY = "your_api_key_here". Obtain your API key by visiting https://aistudio.google.com/apikey. Once setup is complete, run the application using streamlit run study_assistant.py, which will launch the app in your default browser at localhost:8501.
+- 📄 Upload `.txt` study notes
+- ✍️ Paste notes directly into the application
+- 💬 Ask natural-language questions about the notes
+- 🤖 Generate AI-powered answers using Gemini
+- 🧠 Maintain conversation history during the session
+- 🛡️ Keep API credentials outside the source code
+- ⚠️ Validate missing notes and questions
+- 🔧 Handle API/runtime failures gracefully
+- 🎨 Clean and simple Streamlit interface
 
-## How to Use
-When you first open the application, you'll see the main interface with a sidebar containing instructions. Choose your preferred input method by selecting either "Upload File" to load a .txt document containing your study notes, or "Type Notes" to paste content directly into the text area. Once your notes are loaded, the success message confirms they're saved in the session state and will persist even if you accidentally refresh the page. In the "Your question" field, type any question related to your study materials and click "Submit Question". The AI will process your question in the context of your notes and provide a concise, clear answer. Your question and answer will automatically be added to the conversation history displayed below, allowing you to review all previous interactions. You can ask as many questions as you want, and the entire conversation history will be maintained throughout your session.
+---
 
-## Key Concepts Implemented
-The application demonstrates session state management using Streamlit's st.session_state, which persists data throughout a user session and survives page refreshes. Prompt engineering is implemented through system instructions that define the AI's personality and boundaries, ensuring it remains focused on study assistance. The project uses try-except error handling to gracefully manage API failures and provide user-friendly error messages. Environment variable management is implemented securely using the python-dotenv library, ensuring API keys never appear in the codebase. The application validates all user inputs before processing, checking for empty notes and questions to prevent unnecessary API calls and poor user experience.
+## 🏗️ Application Architecture
 
-## Error Handling
-The application implements multiple layers of error handling to ensure reliability. If a user attempts to ask a question without uploading or pasting notes first, they receive a clear error message prompting them to provide study materials. If a user clicks submit without entering a question, a warning message guides them to enter a question. If the Gemini API encounters an error due to network issues, timeouts, or other problems, a user-friendly error message informs them of the issue without exposing technical details. All API calls are wrapped in try-except blocks to prevent application crashes and ensure graceful degradation.
+```text
+User
+ │
+ ├── Upload Notes
+ │
+ └── Paste Notes
+        │
+        ▼
+┌─────────────────────┐
+│   Session State     │
+│  Notes + History    │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Prompt Construction │
+│ + System Guardrails │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│     Gemini API      │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│   Generated Answer  │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Conversation History│
+└─────────────────────┘
+````
 
-## Security Considerations
-API keys are stored exclusively in a .env file that is explicitly listed in .gitignore to prevent accidental exposure in version control. The application never logs or displays sensitive information in user-facing messages. All file inputs are decoded properly from bytes to UTF-8 text, and the application validates file content before processing. Environment variables are loaded securely using load_dotenv with explicit path specification to the .env file.
+---
 
-## Development Milestones
-The project was developed across four focused milestones. Milestone 1 established the user interface with Streamlit page configuration, sidebar instructions, radio button input selection, dual note input methods (file upload and text area), question input field, and submit button with success feedback. Milestone 2 implemented persistent data storage using session state to maintain notes and conversation history across page refreshes, automatic history updates when questions are submitted, and chronological display of all previous interactions. Milestone 3 integrated the Gemini API with proper configuration, system prompts defining the assistant's role and boundaries, dynamic prompt building combining notes and questions, real response generation from the AI, and storage of actual answers in the conversation history. Milestone 4 added production-grade error handling with validation for empty notes, validation for empty questions, try-except blocks around API calls, and user-friendly error messages for all failure scenarios.
+## 🧰 Tech Stack
 
-## Testing
-The application has been tested for core functionality including successful file upload and content parsing, successful text paste and storage, real-time API response generation, conversation history persistence across page refreshes, proper error messages for edge cases, and graceful handling of API failures. All features have been verified to work as expected with various inputs and edge cases.
+| Technology        | Purpose                         |
+| ----------------- | ------------------------------- |
+| Python            | Application logic               |
+| Streamlit         | Web application UI              |
+| Google Gemini API | AI-powered response generation  |
+| python-dotenv     | Environment variable management |
+| pathlib           | File/path handling              |
+| Git & GitHub      | Version control                 |
 
-## Future Enhancements
-Potential improvements for future versions include support for multiple file formats (PDF, DOCX, PPTX), implementation of conversation export functionality, integration with vector databases for better context retrieval, implementation of user authentication for multi-user sessions, addition of conversation clearing functionality, support for multiple languages, and integration with additional AI models for comparison.
+---
 
-## Learning Outcomes
-Through this project, developers gain practical experience with Streamlit application development, API integration with Google's Generative AI, session state management in web applications, prompt engineering and system instruction design, comprehensive error handling patterns, security best practices for API keys, Git version control workflows, and the complete development lifecycle from concept to production-ready code.
+## 🧠 Key Engineering Concepts
 
-## Project Statistics
-Total lines of code: 150, Milestones completed: 4, Features implemented: 8, APIs integrated: 1 (Gemini), Error handlers: 3, Git commits: 4, Development time: 6-7 hours, Code quality score: 85%, Security score: 95%, User experience rating: 90%.
+### 1. AI API Integration
 
-## Author
-Ali Raza Saleem - AI Engineering Enthusiast from Faisalabad, Pakistan
+Integrated Google's Gemini API to transform user questions and study notes into context-aware AI responses.
 
-## License
-This project is part of an AI Engineering learning curriculum and is provided as-is for educational purposes.
+### 2. Prompt Engineering
+
+Implemented system instructions to guide the model toward:
+
+* Staying focused on the provided notes
+* Giving short and understandable answers
+* Avoiding unrelated questions
+* Behaving as a student-focused assistant
+
+### 3. Session State Management
+
+Used Streamlit's session state to preserve:
+
+* Loaded study notes
+* Conversation history
+* User interactions across Streamlit reruns
+
+### 4. Input Validation
+
+The application checks for:
+
+* Missing study notes
+* Empty questions
+* Invalid user input
+
+This prevents unnecessary API calls and improves the user experience.
+
+### 5. Error Handling
+
+External API calls are wrapped with exception handling so unexpected failures don't crash the application.
+
+### 6. Secure Configuration
+
+The Gemini API key is loaded from an environment variable instead of being hardcoded into the source code.
+
+```env
+GEMINI_API_KEY=your_api_key_here
+```
+
+The `.env` file should never be committed to Git.
+
+---
+
+## 📂 Project Structure
+
+```text
+AI-Study-Assistant/
+│
+├── study_assistant.py
+├── README.md
+├── .env
+├── .gitignore
+└── requirements.txt
+```
+
+> `.env` should be excluded from version control through `.gitignore`.
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/alirazasaleem-1/AI-Engineering-Projects.git
+cd AI-Engineering-Projects/02-Intermediate/01-AI-Study-Assistant
+```
+
+### 2. Create a virtual environment
+
+```bash
+python -m venv .venv
+```
+
+Activate it on Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure your API key
+
+Create a `.env` file:
+
+```env
+GEMINI_API_KEY=your_api_key_here
+```
+
+### 5. Run the application
+
+```bash
+streamlit run study_assistant.py
+```
+
+The application will open in your browser.
+
+---
+
+## 💡 Example Workflow
+
+```text
+1. Launch the application
+        ↓
+2. Upload or paste study notes
+        ↓
+3. Enter a question
+        ↓
+4. Application builds a contextual prompt
+        ↓
+5. Gemini generates an answer
+        ↓
+6. Question + answer are added to session history
+        ↓
+7. Continue asking questions
+```
+
+---
+
+## 🛡️ Error Handling
+
+The application handles common failure scenarios including:
+
+* No notes provided
+* No question provided
+* Gemini API failures
+* Unexpected runtime exceptions
+
+Instead of exposing technical errors directly to users, the application provides simple feedback and allows them to try again.
+
+---
+
+## 🔐 Security Considerations
+
+API credentials are managed through environment variables.
+
+```python
+api_key = os.getenv("GEMINI_API_KEY")
+```
+
+Sensitive configuration is intentionally separated from application source code.
+
+The repository should contain:
+
+```text
+.env.example
+```
+
+instead of the real `.env` file when sharing the project publicly.
+
+---
+
+## 📈 Development Process
+
+The project was developed incrementally through four milestones:
+
+### Milestone 1 — UI Foundation
+
+* Streamlit page configuration
+* Sidebar instructions
+* Notes input
+* Question input
+* Basic interaction flow
+
+### Milestone 2 — State Management
+
+* Session state initialization
+* Persistent notes
+* Conversation history
+* File content storage
+
+### Milestone 3 — AI Integration
+
+* Gemini API configuration
+* Environment-based API key
+* System instructions
+* Prompt construction
+* AI response generation
+
+### Milestone 4 — Reliability
+
+* Input validation
+* Exception handling
+* User-friendly error messages
+* Edge-case handling
+
+This incremental approach made it easier to test each layer before adding the next one.
+
+---
+
+## 📝 Git Workflow
+
+The project was developed using incremental commits rather than one large final commit:
+
+```text
+feat: Milestone 1 - UI Setup
+feat: Milestone 2 - Session State Management
+feat: Milestone 3 - Gemini API Integration
+feat: Milestone 4 - Error Handling & Edge Cases
+```
+
+This reflects a structured development workflow where individual features are implemented and verified progressively.
+
+---
+
+## 📊 Project Stats
+
+| Metric           |     Result |
+| ---------------- | ---------: |
+| Development Time | ~6–7 hours |
+| Milestones       |          4 |
+| Main Application | ~150 lines |
+| AI APIs          |          1 |
+| Input Methods    |          2 |
+| Core Features    |         8+ |
+| Git Commits      |          4 |
+
+---
+
+## 🎯 What This Project Demonstrates
+
+This project demonstrates practical experience with:
+
+* Python application development
+* Streamlit
+* Generative AI APIs
+* Gemini API integration
+* Prompt engineering
+* System instructions and guardrails
+* Session state
+* File I/O
+* Environment variables
+* API security fundamentals
+* Input validation
+* Exception handling
+* Git-based development
+
+More importantly, it demonstrates the ability to move from **AI concepts to a working user-facing application**.
+
+---
+
+## 🔮 Future Improvements
+
+Potential next iterations could include:
+
+* 📑 Support for PDF and DOCX notes
+* 🧠 Persistent conversation storage
+* 📝 Automatic note summarization
+* 🎴 Flashcard generation
+* ❓ Automatic quiz generation
+* 🔎 Retrieval-based question answering
+* 📊 Study progress tracking
+* 👤 User authentication
+* 🚀 Cloud deployment
+
+These improvements would gradually move the project from a simple AI application toward a more complete AI study platform.
+
+---
+
+## 🚀 Project Roadmap
+
+This project is part of my broader journey toward becoming a practical AI Engineer.
+
+```text
+Python Foundations
+       ↓
+APIs & Data Handling
+       ↓
+Generative AI Applications
+       ↓
+AI Study Assistant  ← You are here
+       ↓
+Hugging Face & NLP
+       ↓
+RAG Applications
+       ↓
+AI + SQL
+       ↓
+AI Agents
+       ↓
+Production AI Systems
+```
+
+---
+
+## 👨‍💻 Author
+
+**Ali Raza Saleem**
+
+BS Computer Science Student | Aspiring AI Engineer
+
+Building practical AI projects with Python and documenting the journey through GitHub.
+
+---
+
+## ⭐ Key Takeaway
+
+The goal of this project was not simply to call an AI API.
+
+It was to understand how to build a small but complete AI application around an external model — including **user interaction, state management, prompt design, security, validation, error handling, and version control**.
+
+> **Build → Test → Improve → Ship. 🚀**
+
+```
+
+**One important recruiter-facing tweak:** if your actual repo has `requirements.txt` and `.gitignore`, keep those in the README. If you haven't created them yet, **don't claim they exist**—I can make those two files for Project 5 as well. 🔥
+
+| README area | Recruiter value |
+|---|---|
+| Problem + solution | ⭐⭐⭐⭐⭐ |
+| Architecture | ⭐⭐⭐⭐⭐ |
+| Engineering concepts | ⭐⭐⭐⭐⭐ |
+| Setup instructions | ⭐⭐⭐⭐⭐ |
+| Git workflow | ⭐⭐⭐⭐ |
+| Project stats | ⭐⭐⭐ |
+| Future roadmap | ⭐⭐⭐⭐ |
+```
