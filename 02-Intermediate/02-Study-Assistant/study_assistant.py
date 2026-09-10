@@ -74,7 +74,7 @@ if st.button("Submit Question"):
             })
             st.success(f"✅ {question}")
         except Exception as e:
-            st.error(f"Error {e}: Could not get answer. Try Again. ")
+            st.error(f"⚠ Error: Could not get answer. Try Again. ")
     else:
         st.warning("⚠ Please enter a question.")
 
