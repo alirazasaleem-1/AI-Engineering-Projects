@@ -378,25 +378,15 @@ Building practical AI projects with Python and documenting the journey through G
 
 ---
 
-## ⭐ Key Takeaway
+## 🎯 Key Takeaway
 
-The goal of this project was not simply to call an AI API.
+| Focus                   | What I Learned                                                                |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| **AI Integration**      | Built a real AI application using the Gemini API                              |
+| **Prompt Engineering**  | Designed instructions and guardrails for focused responses                    |
+| **State Management**    | Preserved notes and conversation history with Streamlit session state         |
+| **Reliability**         | Added input validation and graceful error handling                            |
+| **Security**            | Managed API credentials through environment variables                         |
+| **Engineering Mindset** | Learned that building AI products requires more than just calling an AI model |
 
-It was to understand how to build a small but complete AI application around an external model — including **user interaction, state management, prompt design, security, validation, error handling, and version control**.
-
-> **Build → Test → Improve → Ship. 🚀**
-
-```
-
-**One important recruiter-facing tweak:** if your actual repo has `requirements.txt` and `.gitignore`, keep those in the README. If you haven't created them yet, **don't claim they exist**—I can make those two files for Project 5 as well. 🔥
-
-| README area | Recruiter value |
-|---|---|
-| Problem + solution | ⭐⭐⭐⭐⭐ |
-| Architecture | ⭐⭐⭐⭐⭐ |
-| Engineering concepts | ⭐⭐⭐⭐⭐ |
-| Setup instructions | ⭐⭐⭐⭐⭐ |
-| Git workflow | ⭐⭐⭐⭐ |
-| Project stats | ⭐⭐⭐ |
-| Future roadmap | ⭐⭐⭐⭐ |
-```
+**The key lesson:** Building AI applications is not just about the model — it’s about building everything around it to make the system **usable, reliable, and secure.** 🚀
