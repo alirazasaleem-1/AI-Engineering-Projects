@@ -363,7 +363,7 @@ AI + SQL
        ↓
 AI Agents
        ↓
-Production AI Systems
+Production AI Systems.
 ```
 
 ---
