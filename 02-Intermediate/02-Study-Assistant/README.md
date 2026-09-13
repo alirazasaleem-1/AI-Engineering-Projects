@@ -374,7 +374,7 @@ Production AI Systems.
 
 BS Computer Science Student | Aspiring AI Engineer
 
-Building practical AI projects with Python and documenting the journey through GitHub.
+Building practical AI projects with Python and documenting the journey through GitHub..
 
 ---
 
