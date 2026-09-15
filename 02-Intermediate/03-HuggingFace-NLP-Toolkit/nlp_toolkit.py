@@ -5,6 +5,10 @@ from transformers import pipeline
 st.set_page_config(page_icon="🧠", page_title="NLP Toolkit", layout="wide")
 st.title("🧠 Hugging Face NLP Toolkit")
 
+# Session State
+if "loaded_model" not in st.session_state:
+    st.session_state.loaded_model = None 
+
 # Sidebar
 with st.sidebar:
     st.header("📖 Instructions")
@@ -28,5 +32,14 @@ text = st.text_area("Paste your text here:", height=100)
 if st.button("Analyze"):
     if text:
         st.write("Processing...")
+
+        if task == "Sentiment Analysis":
+            model = pipeline("sentiment-analysis")
+        elif task == "Text Classification":
+            model = pipeline("zero-shot-classification")
+        elif task == "Question Answering":
+            model = pipeline("question-answering")
+        elif task == "Named Entity Recognition":
+            model = pipeline("ner")
     else:
         st.warning("⚠ Please enter text first!")
