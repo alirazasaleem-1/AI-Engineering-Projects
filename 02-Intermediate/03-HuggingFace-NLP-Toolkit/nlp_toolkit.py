@@ -8,6 +8,8 @@ st.title("🧠 Hugging Face NLP Toolkit")
 # Session State
 if "loaded_model" not in st.session_state:
     st.session_state.loaded_model = None 
+if "current_task" not in st.session_state:
+    st.session_state.current_task = None 
 
 # Sidebar
 with st.sidebar:
@@ -21,7 +23,7 @@ with st.sidebar:
 
 # Select Box
 st.subheader("Select NLP Task")
-task = st.selectbox("Choose Task:", ["Sentiment Analysis", "Text Classification", "Question Answering", "Named Entity Recognition"])
+task = st.selectbox("Choose Task:", ["Sentiment Analysis", "Text Classification", "Named Entity Recognition"])
 st.write(f"Selected Task: {task}")
 
 # Text Box
@@ -33,23 +35,32 @@ if st.button("Analyze"):
     if text:
         st.write("Processing...")
 
+        if task != st.session_state.current_task:
+            st.session_state.loaded_model = None
+            st.session_state.current_task = task 
+
         if task == "Sentiment Analysis":
-            model = pipeline("sentiment-analysis")
+            if st.session_state.loaded_model is None:
+                st.session_state.loaded_model = pipeline("sentiment-analysis")
         elif task == "Text Classification":
-            model = pipeline("zero-shot-classification")
-        elif task == "Question Answering":
-            model = pipeline("question-answering")
+            if st.session_state.loaded_model is None:
+                st.session_state.loaded_model = pipeline("zero-shot-classification")
         elif task == "Named Entity Recognition":
-            model = pipeline("ner")
+            if st.session_state.loaded_model is None:
+                st.session_state.loaded_model = pipeline("ner")
 
-        st.session_state.loaded_model = model 
-        result = model(text)
-        st.subheader("📊 Results")
-
-        col1, col2 = st.columns(2)
-        with col1:
-            st.metric("Sentiment", f"result[0]['label']")
-        with col2:
-            st.metric("Confidence:", f"{result[0]['score']:.2%}")
+        model = st.session_state.loaded_model 
+        try:
+            result = model(text)
+            st.subheader("📊 Results")
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Sentiment", result[0]['label'])
+            with col2:
+                st.metric("Confidence:", f"{result[0]['score']:.2%}")
+        except Exception as e:
+            st.error("❌ Error! Could not analyze. Try again.")
+        
     else:
         st.warning("⚠ Please enter text first!")
