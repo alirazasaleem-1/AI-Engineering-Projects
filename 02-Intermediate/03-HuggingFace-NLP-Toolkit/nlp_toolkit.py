@@ -23,7 +23,7 @@ with st.sidebar:
 
 # Select Box
 st.subheader("Select NLP Task")
-task = st.selectbox("Choose Task:", ["Sentiment Analysis", "Text Classification", "Named Entity Recognition"])
+task = st.selectbox("Choose Task:", ["Sentiment Analysis"])
 st.write(f"Selected Task: {task}")
 
 # Text Box
@@ -43,12 +43,6 @@ if st.button("Analyze"):
             if task == "Sentiment Analysis":
                 if st.session_state.loaded_model is None:
                     st.session_state.loaded_model = pipeline("sentiment-analysis")
-            elif task == "Text Classification":
-                if st.session_state.loaded_model is None:
-                    st.session_state.loaded_model = pipeline("zero-shot-classification")
-            elif task == "Named Entity Recognition":
-                if st.session_state.loaded_model is None:
-                    st.session_state.loaded_model = pipeline("ner")
 
             model = st.session_state.loaded_model 
             try:
