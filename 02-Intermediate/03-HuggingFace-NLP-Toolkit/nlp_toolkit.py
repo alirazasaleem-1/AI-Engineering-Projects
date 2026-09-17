@@ -8,23 +8,16 @@ st.title("🧠 Hugging Face NLP Toolkit")
 # Session State
 if "loaded_model" not in st.session_state:
     st.session_state.loaded_model = None 
-if "current_task" not in st.session_state:
-    st.session_state.current_task = None 
 
 # Sidebar
 with st.sidebar:
     st.header("📖 Instructions")
     st.markdown("""
 **How to use:**
-1. Select NLP Task (Sentiment, Classification, etc)
+1. Analyze sentiment of your text
 2. Enter text to analyze
 3. Get results
 """)
-
-# Select Box
-st.subheader("Select NLP Task")
-task = st.selectbox("Choose Task:", ["Sentiment Analysis"])
-st.write(f"Selected Task: {task}")
 
 # Text Box
 st.subheader("Enter Text to Analyze")
@@ -33,16 +26,9 @@ text = st.text_area("Paste your text here:", height=100)
 # Submit button
 if st.button("Analyze"):
     if text:
-        with st.spinner("🔃 Loading Model..."):
-            st.write("Processing...")
-
-            if task != st.session_state.current_task:
-                st.session_state.loaded_model = None
-                st.session_state.current_task = task 
-
-            if task == "Sentiment Analysis":
-                if st.session_state.loaded_model is None:
-                    st.session_state.loaded_model = pipeline("sentiment-analysis")
+        with st.spinner("🔃 Loading model..."):
+            if st.session_state.loaded_model is None:
+                st.session_state.loaded_model = pipeline("sentiment-analysis")
 
             model = st.session_state.loaded_model 
             try:
