@@ -3,7 +3,7 @@ from transformers import pipeline
 
 # App Setup
 st.set_page_config(page_icon="🧠", page_title="NLP Toolkit", layout="wide")
-st.title("🧠 Hugging Face NLP Toolkit")
+st.title("🧠 NLP Toolkit")
 
 # Session State
 if "loaded_model" not in st.session_state:
