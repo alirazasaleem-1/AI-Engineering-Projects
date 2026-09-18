@@ -21,7 +21,7 @@ with st.sidebar:
 
 # Text Box
 st.subheader("Enter Text to Analyze")
-text = st.text_area("Paste your text here:", height=100)
+text = st.text_area("Paste your text here:", height=150)
 
 # Submit button
 if st.button("Analyze"):
@@ -31,10 +31,15 @@ if st.button("Analyze"):
                 st.session_state.loaded_model = pipeline("sentiment-analysis")
 
             model = st.session_state.loaded_model 
+            sentences = text.split("\n")
+            results = []
             try:
-                result = model(text)
+                for sentence in sentences:
+                    result = model(text)
+                    results.append(result)
                 st.subheader("📊 Results")
-                
+                for i, result in enumerate(results):
+                    print(f"{i+1}. {result}")
                 col1, col2 = st.columns(2)
                 with col1:
                     st.metric("Sentiment", result[0]['label'])
