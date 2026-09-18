@@ -35,11 +35,11 @@ if st.button("Analyze"):
             results = []
             try:
                 for sentence in sentences:
-                    result = model(text)
+                    result = model(sentence)
                     results.append(result)
                 st.subheader("📊 Results")
                 for i, result in enumerate(results):
-                    print(f"{i+1}. {result}")
+                    st.write(f"{i+1}. {result}")
                 col1, col2 = st.columns(2)
                 with col1:
                     st.metric("Sentiment", result[0]['label'])
