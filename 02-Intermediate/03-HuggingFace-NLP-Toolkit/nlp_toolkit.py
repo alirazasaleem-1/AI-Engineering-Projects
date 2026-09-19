@@ -1,5 +1,16 @@
 import streamlit as st 
 from transformers import pipeline 
+from google import genai 
+import os
+from pathlib import Path 
+from dotenv import load_dotenv
+
+# Loading env
+env_path = Path(__file__).parent / ".env"
+load_dotenv(env_path)
+
+api_key = os.getenv("GEMINI_API_KEY")
+client = genai.Client(api_key = api_key)
 
 # App Setup
 st.set_page_config(page_icon="🧠", page_title="NLP Toolkit", layout="wide")
@@ -14,14 +25,21 @@ with st.sidebar:
     st.header("📖 Instructions")
     st.markdown("""
 **How to use:**
-1. Analyze sentiment of your text
-2. Enter text to analyze
+1. Select Task
+2. Enter text to analyze or Question to get answer
 3. Get results
 """)
 
 # Text Box
-st.subheader("Enter Text to Analyze")
-text = st.text_area("Paste your text here:", height=150)
+task = st.radio("Select Task", ["Sentiment Analysis", "Question Answering"])
+text = ""
+question = ""
+if task == "Sentiment Analysis":
+    text = st.text_area("Enter the text to analyze.", height=100)
+if task == "Question Answering":
+    question = st.text_area("Enter the Question to get answer.", height=150)
+    response = client.models.generate_content(model="gemini-3.6-flash", contents = f"Answer this question briefly without saying anything else: {question}")
+    st.write(response.text)
 
 # Submit button
 if st.button("Analyze"):
